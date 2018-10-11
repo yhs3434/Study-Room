@@ -3,12 +3,14 @@ package com.yoonhs3434.suroom;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
+import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,10 +47,11 @@ public class SubjectChoiceActivity extends Activity {
         JSONObject data_req = new JSONObject();
         data_req.accumulate("id", MySetting.getMyId());
         for(int i=0; i<num_of_btn ; i++){
-            data_req.accumulate(String.valueOf(btn[i].getText()), btn[i].isChecked());
+            data_req.accumulate(String.valueOf(btn[i].getText()), convertBoolInt(btn[i].isChecked()));
         }
 
         HttpPost send = new HttpPost(MySetting.getMyUrl()+"choice/subject/", data_req);
+        Toast.makeText(getApplicationContext(), data_req.toString(), Toast.LENGTH_LONG).show();
         send.start();
         try {
             send.join();
@@ -69,5 +72,13 @@ public class SubjectChoiceActivity extends Activity {
     @Override
     public void onBackPressed(){
         return;
+    }
+
+    private int convertBoolInt(boolean input){
+        if(input){
+            return 1;
+        }
+        else
+            return 0;
     }
 }

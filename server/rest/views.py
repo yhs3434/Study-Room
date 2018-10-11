@@ -80,7 +80,7 @@ def choice_subject(request):
                 continue
             try:
                 subject_id = (Subject.objects.get(name=key)).id
-                if(data[key]):
+                if(data[key] == 1):
                     insert = User_Subject.objects.create(user_id=User.objects.get(pk=user_id), subject_id=Subject.objects.get(pk=subject_id))
                     list.append(insert)
                 else:
