@@ -10,6 +10,9 @@ from rest_framework.response import Response
 
 # Create your views here.
 
+def index(request):
+    return render(request, 'rest/index.html', {})
+
 @api_view(['GET', 'POST'])
 def user_list(request):
     if request.method == 'GET':
