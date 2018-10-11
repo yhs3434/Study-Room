@@ -43,7 +43,7 @@ public class JoinActivity extends AppCompatActivity {
             }
             Toast.makeText(getApplicationContext(), jsonParam.toString(), Toast.LENGTH_LONG).show();
 
-            HttpPost send = new HttpPost(MySetting.getMyUrl()+"login/join/", jsonParam);
+            HttpPost send = new HttpPost(MySetting.getMyUrl()+"join/", jsonParam);
 
             send.start();
             try {

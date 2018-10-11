@@ -33,7 +33,6 @@ public class HttpPost extends  Thread {
             conn.setRequestProperty("Content-Type", "application/json");
             conn.setRequestProperty("Accept", "application/json");
 
-
             OutputStream os = conn.getOutputStream();
             os.write(data.getBytes("euc-kr"));
             os.flush();

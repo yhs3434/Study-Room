@@ -3,7 +3,8 @@ from django.http import HttpResponse, JsonResponse
 from rest_framework.decorators import api_view
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from .models import User
+from .models import User, Group, Subject, Tendency
+from .models import User_Group, User_Subject, User_Tendency
 from .serializers import UserSerializer
 from rest_framework import status
 from rest_framework.response import Response
@@ -54,7 +55,6 @@ def user_detail(request, pk):
 def user_login(request):
     if (request.method == 'POST'):
         data = JSONParser().parse(request)
-        print(data)
         try:
             user = User.objects.filter(auth_id = data['auth_id'])
             if (user[0].auth_pw == data['auth_pw']):
@@ -67,3 +67,31 @@ def user_login(request):
 
     else:
         return (Response(status = status.HTTP_400_BAD_REQUEST))
+
+@api_view(['POST'])
+def choice_subject(request):
+    if (request.method == 'POST'):
+        data = JSONParser().parse(request)
+        user_id = data['id']
+        list = []
+
+        for key in data:
+            if(key == 'id'):
+                continue
+            try:
+                subject_id = (Subject.objects.get(name=key)).id
+                if(data[key]):
+                    insert = User_Subject.objects.create(user_id=User.objects.get(pk=user_id), subject_id=Subject.objects.get(pk=subject_id))
+                    list.append(insert)
+                else:
+                    queryset = User_Subject.objects.all()
+                    queryset = queryset.filter(user_id=User.objects.get(pk=user_id), subject_id=Subject.objects.get(pk=subject_id))
+                    queryset.delete()
+            except:
+                continue
+            
+        return Response(status=status.HTTP_200_OK)
+          
+
+    else:
+        return Response(status=status.HTTP_400_BAD_REQUEST)

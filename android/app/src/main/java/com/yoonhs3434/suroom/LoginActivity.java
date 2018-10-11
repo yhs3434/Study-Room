@@ -39,7 +39,7 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
 
-                HttpLogin send = new HttpLogin(MySetting.getMyUrl()+"login/sign_in/", requestData);
+                HttpLogin send = new HttpLogin(MySetting.getMyUrl()+"sign_in/", requestData);
                 send.start();
                 try {
                     send.join();

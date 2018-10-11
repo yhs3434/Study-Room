@@ -34,6 +34,9 @@ class User_Group(models.Model):
     joined = models.DateTimeField(timezone.now())
     role = models.CharField(max_length=20)
 
+    class Meta:
+        unique_together = (("user_id", "group_id"),)
+
 class Subject(models.Model):
     name = models.CharField(max_length=20)
 
@@ -41,10 +44,16 @@ class User_Subject(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     subject_id = models.ForeignKey(Subject, on_delete=models.CASCADE)
 
+    class Meta:
+        unique_together = (("user_id", "subject_id"),)
+
 class Tendency(models.Model):
     name = models.CharField(max_length=20)
 
 class User_Tendency(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    subject_id = models.ForeignKey(Tendency, on_delete=models.CASCADE)
+    tendency_id = models.ForeignKey(Tendency, on_delete=models.CASCADE)
     choice = models.IntegerField()
+
+    class Meta:
+        unique_together = (("user_id", "tendency_id"),)

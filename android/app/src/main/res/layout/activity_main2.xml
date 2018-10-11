@@ -6,4 +6,14 @@
     android:layout_height="match_parent"
     tools:context=".Main2Activity">
 
+    <Button
+        android:id="@+id/choiceSubjectButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginLeft="60dp"
+        android:layout_marginTop="64dp"
+        android:text="관심 분야 선택"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </android.support.constraint.ConstraintLayout>
