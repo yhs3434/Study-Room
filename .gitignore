@@ -5,6 +5,8 @@ myvenv
 db.sqlite3
 /static
 .DS_Store
+migrations
+venv
 
 
 # Created by https://www.gitignore.io/api/java,python,django,android,androidstudio

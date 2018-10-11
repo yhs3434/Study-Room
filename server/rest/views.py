@@ -29,6 +29,7 @@ def user_list(request):
             return JsonResponse(serializer.data, status=201)
         return JsonResponse(serializer.errors, status=400)
 
+@api_view(['GET', 'PUT', 'DELETE'])
 def user_detail(request, pk):
     try:
         user = User.objects.get(pk=pk)

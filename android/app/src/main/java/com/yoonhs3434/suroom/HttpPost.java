@@ -34,7 +34,7 @@ public class HttpPost extends  Thread {
             conn.setRequestProperty("Accept", "application/json");
 
             OutputStream os = conn.getOutputStream();
-            os.write(data.getBytes("euc-kr"));
+            os.write(data.getBytes("UTF-8"));
             os.flush();
 
             int responseCode = conn.getResponseCode();
