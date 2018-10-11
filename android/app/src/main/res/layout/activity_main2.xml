@@ -13,6 +13,7 @@
         android:layout_marginStart="60dp"
         android:layout_marginLeft="60dp"
         android:layout_marginTop="64dp"
+        android:onClick="choiceSubjectClicked"
         android:text="관심 분야 선택"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

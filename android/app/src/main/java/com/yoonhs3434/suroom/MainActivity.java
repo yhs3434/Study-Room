@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MySetting.setMyUrl("http://las9897.pythonanywhere.com:8000/rest/");
+        MySetting.setMyUrl("http://las9897.pythonanywhere.com/rest/");
         _MainActivity = MainActivity.this;
     }
 

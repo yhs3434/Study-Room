@@ -5,7 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserSubjectSerializer
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -68,7 +68,7 @@ def user_login(request):
     else:
         return (Response(status = status.HTTP_400_BAD_REQUEST))
 
-@api_view(['POST'])
+@api_view(['GET', 'POST'])
 def choice_subject(request):
     if (request.method == 'POST'):
         data = JSONParser().parse(request)
@@ -91,7 +91,11 @@ def choice_subject(request):
                 continue
             
         return Response(status=status.HTTP_200_OK)
-          
+    
+    elif (request.method == 'GET'):
+        user_subject = User_Subject.objects.all()
+        serializer = UserSubjectSerializer(user_subject, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     else:
         return Response(status=status.HTTP_400_BAD_REQUEST)
