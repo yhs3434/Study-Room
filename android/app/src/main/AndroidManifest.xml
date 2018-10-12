@@ -28,7 +28,10 @@
         <activity android:name=".JoinActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".Main2Activity" />
-        <activity android:name=".SubjectChoiceActivity" android:theme="@android:style/Theme.Dialog"/>
+        <activity
+            android:name=".SubjectChoiceActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".TendencyChoiceActivity"></activity>
     </application>
 
 </manifest>

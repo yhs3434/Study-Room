@@ -52,8 +52,9 @@ class Tendency(models.Model):
 
 class User_Tendency(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    tendency_id = models.ForeignKey(Tendency, on_delete=models.CASCADE)
-    choice = models.IntegerField()
-
-    class Meta:
-        unique_together = (("user_id", "tendency_id"),)
+    rule = models.SmallIntegerField(default=1)
+    learning = models.SmallIntegerField(default=1)
+    numberPeople = models.SmallIntegerField(default=1)
+    friendship = models.SmallIntegerField(default=1)
+    environment = models.SmallIntegerField(default=1)
+    style = models.SmallIntegerField(default=1)

@@ -35,8 +35,9 @@ class TendencyAdmin(admin.ModelAdmin):
 
 @admin.register(User_Tendency)
 class UserTendencyAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'tendency_id', 'choice']
+    list_display = ['id', 'user_id', 'rule', 'learning', 'numberPeople', 'friendship', 'environment', 'style']
     list_display_links = ['id']
+
 
 '''
 admin.site.register(User)

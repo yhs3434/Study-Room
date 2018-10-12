@@ -25,6 +25,7 @@
         android:layout_marginStart="44dp"
         android:layout_marginLeft="44dp"
         android:layout_marginTop="64dp"
+        android:onClick="choiceTendencyClicked"
         android:text="공부 성향 선택"
         app:layout_constraintStart_toEndOf="@+id/choiceSubjectButton"
         app:layout_constraintTop_toTopOf="parent" />

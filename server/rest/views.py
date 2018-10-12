@@ -5,7 +5,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
-from .serializers import UserSerializer, UserSubjectSerializer
+from .serializers import UserSerializer, UserSubjectSerializer, UserTendencySerializer
 from rest_framework import status
 from rest_framework.response import Response
 
@@ -99,4 +99,32 @@ def choice_subject(request):
         return Response(data=serializer.data, status=status.HTTP_200_OK)
 
     else:
-        return Response(status=status.HTTP_400_BAD_REQUEST)
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+@api_view(['POST', 'GET'])
+def choice_tendency(request):
+    if (request.method=='POST'):
+        data = JSONParser().parse(request)
+        user_id = data['id']
+        user = User.objects.get(pk=user_id)
+
+        try:
+            queryset = User_Tendency.objects.filter(user_id=user)
+            queryset.delete()
+        except:
+            print('user(',user_id,') choose tendencies.')
+
+        try:
+            insert = User_Tendency.objects.create(user_id=user, rule=data['규칙'], learning=data['학습량'], \
+            numberPeople=data['인원'], friendship=data['친목'], environment=data['환경'], style=data['스타일'])
+        except:
+            return Response(status=status.HTTP_406_NOT_ACCEPTABLE)
+        return Response(status=status.HTTP_200_OK)
+
+    elif (request.method=='GET'):
+        user_tendency = User_Tendency.objects.all()
+        serializer = UserTendencySerializer(user_tendency, many=True)
+        return Response(data=serializer.data, status=status.HTTP_200_OK)
+
+    else:
+        return Response(status=status.HTTP_404_NOT_FOUND)
