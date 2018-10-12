@@ -31,7 +31,11 @@
         <activity
             android:name=".SubjectChoiceActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".TendencyChoiceActivity"></activity>
+        <activity
+            android:name=".TendencyChoiceActivity"
+            android:theme="@android:style/Theme.Dialog" />
+        <activity android:name=".LoadingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
     </application>
 
 </manifest>

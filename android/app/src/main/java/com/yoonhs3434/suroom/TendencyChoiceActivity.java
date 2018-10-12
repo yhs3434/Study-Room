@@ -41,7 +41,7 @@ public class TendencyChoiceActivity extends Activity {
 
     }
 
-    void closeButtonClicked(View v) throws JSONException {
+    public void closeButtonClicked(View v) throws JSONException {
         int index=0;
 
         JSONObject data_req = new JSONObject();
@@ -52,7 +52,7 @@ public class TendencyChoiceActivity extends Activity {
                     index = j;
                 }
             }
-            data_req.accumulate((textViews[i].getText()).toString(), index);
+            data_req.accumulate(String.valueOf(textViews[i].getText()), index);
         }
 
         HttpPost send = new HttpPost(MySetting.getMyUrl() + "choice/tendency/", data_req);

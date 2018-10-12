@@ -11,7 +11,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -24,7 +24,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="규칙"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/ruleGroup"
@@ -37,13 +39,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="자유로움" />
+                android:text="자유로움"
+                android:textColor="@android:color/background_dark" />
 
             <RadioButton
                 android:id="@+id/ruleButton2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -51,6 +55,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="엄격함" />
         </RadioGroup>
     </LinearLayout>
@@ -59,10 +64,9 @@
         android:id="@+id/linearLayout2"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout">
 
@@ -72,7 +76,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="학습량"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/learningGroup"
@@ -89,6 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="적음" />
 
             <RadioButton
@@ -96,6 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -103,6 +111,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="많음" />
         </RadioGroup>
     </LinearLayout>
@@ -111,10 +120,9 @@
         android:id="@+id/linearLayout3"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
 
@@ -124,7 +132,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="인원"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/numberPeopleGroup"
@@ -138,6 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="적음" />
 
             <RadioButton
@@ -145,6 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -152,6 +164,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="많음" />
         </RadioGroup>
     </LinearLayout>
@@ -160,10 +173,9 @@
         android:id="@+id/linearLayout4"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
 
@@ -173,7 +185,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="친목"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/friendshipGroup"
@@ -188,6 +202,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="적음" />
 
             <RadioButton
@@ -195,6 +210,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -202,6 +218,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="많음" />
         </RadioGroup>
     </LinearLayout>
@@ -210,10 +227,9 @@
         android:id="@+id/linearLayout5"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout4">
 
@@ -223,7 +239,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="환경"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/environmentGroup"
@@ -236,6 +254,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="정적" />
 
             <RadioButton
@@ -243,6 +262,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -250,6 +270,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="동적" />
         </RadioGroup>
     </LinearLayout>
@@ -258,7 +279,7 @@
         android:id="@+id/linearLayout6"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -271,7 +292,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:text="스타일"
-            android:textSize="20sp" />
+            android:textColor="@android:color/background_dark"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
         <RadioGroup
             android:id="@+id/styleGroup"
@@ -284,6 +307,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="암기 위주" />
 
             <RadioButton
@@ -291,6 +315,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="보통" />
 
             <RadioButton
@@ -298,18 +323,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="@android:color/background_dark"
                 android:text="이해 위주" />
         </RadioGroup>
     </LinearLayout>
 
     <Button
-        android:id="@+id/checkButton"
-        android:layout_width="wrap_content"
+        android:id="@+id/closeButton"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
         android:onClick="closeButtonClicked"
         android:text="확인"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout6" />
 </android.support.constraint.ConstraintLayout>
