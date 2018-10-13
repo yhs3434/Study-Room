@@ -5,9 +5,13 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
+from .models import Wait
 from .serializers import UserSerializer, UserSubjectSerializer, UserTendencySerializer
+from. serializers import WaitSerializer
 from rest_framework import status
 from rest_framework.response import Response
+from rest_framework.views import APIView
+from django.http import Http404
 
 # Create your views here.
 
@@ -128,3 +132,38 @@ def choice_tendency(request):
 
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
+
+class FindGroup(APIView):
+    def get(self, request):
+        waiter = Wait.objects.all()
+        serializer = WaitSerializer(waiter, many=True)
+        return Response(serializer.data)
+    
+    def post(self, request):
+        data = JSONParser().parse(request)
+        try:
+            user = User.objects.get(pk=data['id'])
+        except User.DoesNotExist:
+            return Http404
+        Wait.objects.filter(user=user).delete()
+        Wait.objects.create(user=user)
+        return Response(status=status.HTTP_201_CREATED)
+        
+
+
+class FindGroupDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Wait.objects.get(pk=pk)
+        except Snippet.DoesNotExist:
+            return Http404
+
+    def get(self, request, pk, format=None):
+        waiter = self.get_object(pk)
+        serializer = WaitSerializer(waiter)
+        return Response(serializer.data)
+
+    def delete(self, request, pk, format=None):
+        waiter = self.get_object(pk)
+        waiter.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)

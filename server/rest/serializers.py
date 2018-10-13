@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
+from .models import Wait
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -36,4 +37,9 @@ class UserSubjectSerializer(serializers.ModelSerializer):
 class UserTendencySerializer(serializers.ModelSerializer):
     class Meta:
         model = User_Tendency
+        fields = '__all__'
+
+class WaitSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Wait
         fields = '__all__'

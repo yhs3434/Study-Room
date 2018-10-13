@@ -31,7 +31,7 @@ class Group(models.Model):
 class User_Group(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
-    joined = models.DateTimeField(timezone.now())
+    joined = models.DateTimeField(default=timezone.now)
     role = models.CharField(max_length=20)
 
     class Meta:
@@ -58,3 +58,7 @@ class User_Tendency(models.Model):
     friendship = models.SmallIntegerField(default=1)
     environment = models.SmallIntegerField(default=1)
     style = models.SmallIntegerField(default=1)
+
+class Wait(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    start_time = models.DateTimeField(default=timezone.now)
