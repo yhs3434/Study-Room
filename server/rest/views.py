@@ -7,7 +7,7 @@ from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
 from .models import Wait
 from .serializers import UserSerializer, UserSubjectSerializer, UserTendencySerializer
-from. serializers import WaitSerializer
+from. serializers import WaitSerializer, GroupSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -148,14 +148,12 @@ class FindGroup(APIView):
         Wait.objects.filter(user=user).delete()
         Wait.objects.create(user=user)
         return Response(status=status.HTTP_201_CREATED)
-        
-
 
 class FindGroupDetail(APIView):
     def get_object(self, pk):
         try:
             return Wait.objects.get(pk=pk)
-        except Snippet.DoesNotExist:
+        except Wait.DoesNotExist:
             return Http404
 
     def get(self, request, pk, format=None):
@@ -167,3 +165,48 @@ class FindGroupDetail(APIView):
         waiter = self.get_object(pk)
         waiter.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+# 방 목록, 생성 클래스
+class group_list(APIView):
+    def get(self, request):
+        groups = Group.objects.all()
+        serializer = GroupSerializer(groups, many=True)
+        return Response(serializer.data)
+
+    def post(self, request):
+        data = JSONParser().parse(request)
+        serializer = GroupSerializer(data=data)
+        if (serializer.is_valid()):
+            serializer.save()
+            return Response(data=serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(status.HTTP_406_NOT_ACCEPTABLE)
+
+# 방 가입, 삭제 클래스
+class group_detail(APIView):
+    def get_object(self, pk):
+        try:
+            return Group.objects.get(pk=pk)
+        except Group.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, pk):
+        obj = self.get_object(pk)
+        obj.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+def join_group(request):
+    if (request.method != 'POST'):
+        return Response(status=status.HTTP_400_BAD_REQUEST)
+    
+    data = JSONParser().parse(request)
+    user_id = data['user_id']
+    group_id = data['group_id']
+    try:
+        user = User.objects.get(pk=user_id)
+        group = Group.objects.get(pk=group_id)
+    except:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+    
+    User_Group.objects.create(user_id=user, group_id=group)
+    return Response(status=status.HTTP_201_CREATED)

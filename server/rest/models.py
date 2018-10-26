@@ -32,7 +32,7 @@ class User_Group(models.Model):
     user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
     joined = models.DateTimeField(default=timezone.now)
-    role = models.CharField(max_length=20)
+    role = models.IntegerField(default=0)
 
     class Meta:
         unique_together = (("user_id", "group_id"),)

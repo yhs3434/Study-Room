@@ -6,7 +6,9 @@ db.sqlite3
 /static
 .DS_Store
 migrations/
+migrations
 venv
+suroom_venv/
 
 
 # Created by https://www.gitignore.io/api/java,python,django,android,androidstudio
