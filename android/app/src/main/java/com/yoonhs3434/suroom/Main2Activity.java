@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yoonhs3434.suroom.GroupMatch.ItemGroup;
 
@@ -82,10 +84,18 @@ public class Main2Activity extends AppCompatActivity {
     }
 
     public void getGroupListClicked(View v){
+        String [] params = new String[1];
+        params[0] = MySetting.getMyUrl()+"group/";
+
         HttpGetRequest myHttp = new HttpGetRequest();
-        myHttp.execute(MySetting.getMyUrl() + "group/");
-        adapter = new MyAdapter(mContext, items);
-        group_list.setAdapter(adapter);
+        myHttp.execute(params);
+
+        ArrayList testItems = new ArrayList<>();
+        testItems.add(new ItemGroup("test", "des"));
+        testItems.add(new ItemGroup("test2", "des2"));
+
+        // adapter = new MyAdapter(mContext, testItems);
+        // group_list.setAdapter(adapter);
     }
 
     // Adapter class
@@ -154,7 +164,7 @@ public class Main2Activity extends AppCompatActivity {
             String inputLine;
             String stringResult;
 
-            try{
+            try {
                 URL myUrl = new URL(stringUrl);
                 HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
 
@@ -168,7 +178,7 @@ public class Main2Activity extends AppCompatActivity {
                 BufferedReader reader = new BufferedReader(streamReader);
                 StringBuilder stringBuilder = new StringBuilder();
 
-                while((inputLine = reader.readLine()) != null){
+                while ((inputLine = reader.readLine()) != null) {
                     stringBuilder.append(inputLine);
                 }
 
@@ -190,14 +200,23 @@ public class Main2Activity extends AppCompatActivity {
             return result;
         }
 
-        protected void onPostExcute(JSONArray result) throws JSONException {
+        @Override
+        protected void onPostExecute(JSONArray result) {
+            super.onPostExecute(result);
             items = null;
             items = new ArrayList<>();
 
-            for(int i=0; i<result.length(); i++){
-                items.add(new ItemGroup(result.getJSONObject(i).getString("title"), result.getJSONObject(i).getString("description")));
-            }
+            try {
+                for(int i=0; i<result.length(); i++){
 
+                    items.add(new ItemGroup(result.getJSONObject(i).getString("name"), result.getJSONObject(i).getString("description")));
+                }
+
+                adapter = new MyAdapter(mContext, items);
+                group_list.setAdapter(adapter);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
