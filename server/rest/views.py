@@ -133,6 +133,7 @@ def choice_tendency(request):
     else:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
+# 매칭 구현을 위한 뷰 (사용 할지 말지는 미지수)
 class FindGroup(APIView):
     def get(self, request):
         waiter = Wait.objects.all()
@@ -149,6 +150,7 @@ class FindGroup(APIView):
         Wait.objects.create(user=user)
         return Response(status=status.HTTP_201_CREATED)
 
+# 매칭 구현을 위한 뷰 (사용 할지 말지는 미지수)
 class FindGroupDetail(APIView):
     def get_object(self, pk):
         try:
@@ -169,7 +171,7 @@ class FindGroupDetail(APIView):
 # 방 목록, 생성 클래스
 class group_list(APIView):
     def get(self, request):
-        groups = Group.objects.all()
+        groups = Group.objects.filter(public=True)
         serializer = GroupSerializer(groups, many=True)
         return Response(serializer.data)
 
@@ -208,5 +210,5 @@ def join_group(request):
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
     
-    User_Group.objects.create(user_id=user, group_id=group)
+    User_Group.objects.create(user=user, group=group, role=0)
     return Response(status=status.HTTP_201_CREATED)

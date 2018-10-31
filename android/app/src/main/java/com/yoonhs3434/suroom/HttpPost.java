@@ -38,6 +38,7 @@ public class HttpPost extends  Thread {
             os.flush();
 
             int responseCode = conn.getResponseCode();
+
             conn.disconnect();
 
         } catch (IOException e) {

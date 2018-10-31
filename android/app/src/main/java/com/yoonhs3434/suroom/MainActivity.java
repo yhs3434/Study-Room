@@ -8,6 +8,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main);
         Intent intent = new Intent(this, LoadingActivity.class);
         startActivity(intent);
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MySetting.setMyUrl("http://las9897.pythonanywhere.com/rest/");
+        MySetting.setMyUrl("http://10.0.2.2:8000/rest/");
         _MainActivity = MainActivity.this;
     }
 

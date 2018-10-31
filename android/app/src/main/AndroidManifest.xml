@@ -34,8 +34,10 @@
         <activity
             android:name=".TendencyChoiceActivity"
             android:theme="@android:style/Theme.Dialog" />
-        <activity android:name=".LoadingActivity"
-            android:theme="@android:style/Theme.NoTitleBar.Fullscreen"/>
+        <activity
+            android:name=".LoadingActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity android:name=".GroupDetail"></activity>
     </application>
 
 </manifest>

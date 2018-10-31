@@ -26,16 +26,25 @@ class User(models.Model):
 
 class Group(models.Model):
     name = models.CharField(max_length=20)
-    description = models.CharField(max_length=20)
-
+    description = models.CharField(max_length=200, default="")
+    public = models.NullBooleanField(default=True)
+    max_num_people = models.IntegerField(default = 10)
+    num_people = models.IntegerField(default = 0)
+    tag1 = models.CharField(max_length = 200, blank=True, null=True)
+    tag2 = models.CharField(max_length = 200, blank=True, null=True)
+    tag3 = models.CharField(max_length = 200, blank=True, null=True)
+    tag4 = models.CharField(max_length = 200, blank=True, null=True)
+    tag5 = models.CharField(max_length = 200, blank=True, null=True)
+    created_date = models.DateTimeField(default=timezone.now)
+    
 class User_Group(models.Model):
-    user_id = models.ForeignKey(User, on_delete=models.CASCADE)
-    group_id = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
     joined = models.DateTimeField(default=timezone.now)
     role = models.IntegerField(default=0)
 
     class Meta:
-        unique_together = (("user_id", "group_id"),)
+        unique_together = (("user", "group"),)
 
 class Subject(models.Model):
     name = models.CharField(max_length=20)

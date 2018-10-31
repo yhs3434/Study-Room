@@ -16,7 +16,7 @@ class GroupAdmin(admin.ModelAdmin):
 
 @admin.register(User_Group)
 class UserGroupAdmin(admin.ModelAdmin):
-    list_display = ['id', 'user_id', 'group_id', 'joined', 'role']
+    list_display = ['id', 'user', 'group', 'joined', 'role']
     list_display_links = ['id']
 
 @admin.register(Subject)

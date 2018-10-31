@@ -14,8 +14,9 @@
 
             <TextView
                 android:id="@+id/textGroupTitle"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/activity_horizontal_margin"
                 android:text="그룹 명"
                 android:textColor="@color/design_default_color_primary_dark"
                 android:textSize="24sp" />
@@ -24,7 +25,85 @@
                 android:id="@+id/textGroupDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="그룹 설명" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="10dp"
+                android:text="설명" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textTag1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="1"
+                    android:text="# 해쉬" />
+
+                <TextView
+                    android:id="@+id/textTag2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="# 해쉬" />
+
+                <TextView
+                    android:id="@+id/textTag3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="# 해쉬" />
+
+                <TextView
+                    android:id="@+id/textTag4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="# 해쉬" />
+
+                <TextView
+                    android:id="@+id/textTag5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="# 해쉬" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:dividerPadding="@dimen/activity_vertical_margin"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/textNumPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_weight="0"
+                    android:gravity="right"
+                    android:text="num" />
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="15dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="center_horizontal"
+                    android:text="/" />
+
+                <TextView
+                    android:id="@+id/textMaxNumPeople"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:gravity="left"
+                    android:text="maxNum" />
+
+            </LinearLayout>
+
         </LinearLayout>
     </android.support.v7.widget.CardView>
 </RelativeLayout>

@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.yoonhs3434.suroom.GroupMatch.ItemGroup;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -45,11 +47,12 @@ public class Main2Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_main2);
 
         choice_subject_btn = (Button) findViewById(R.id.choiceSubjectButton);
         choice_tendency_btn = (Button) findViewById(R.id.choiceTendencyButton);
-        matching_btn = (Button) findViewById(R.id.matchingButton);
+        // matching_btn = (Button) findViewById(R.id.matchingButton);
         group_list = (RecyclerView) findViewById(R.id.groupList);
         group_list.setHasFixedSize(true);
         items = new ArrayList<>();
@@ -89,13 +92,6 @@ public class Main2Activity extends AppCompatActivity {
 
         HttpGetRequest myHttp = new HttpGetRequest();
         myHttp.execute(params);
-
-        ArrayList testItems = new ArrayList<>();
-        testItems.add(new ItemGroup("test", "des"));
-        testItems.add(new ItemGroup("test2", "des2"));
-
-        // adapter = new MyAdapter(mContext, testItems);
-        // group_list.setAdapter(adapter);
     }
 
     // Adapter class
@@ -119,8 +115,13 @@ public class Main2Activity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull ViewHolder holder, int i) {
-            holder.text_title.setText(mItems.get(i).title);
-            holder.text_description.setText(mItems.get(i).description);
+            holder.title.setText(mItems.get(i).title);
+            holder.description.setText(mItems.get(i).description);
+            holder.numPeople.setText(Integer.toString(mItems.get(i).numPeople));
+            holder.maxNumPeople.setText(Integer.toString(mItems.get(i).maxNumPeople));
+            for(int j=0; j<holder.tag.length; j++){
+                holder.tag[j].setText(mItems.get(i).tags[j]);
+            }
 
             // setAnimation(holder.imageView, i);
         }
@@ -131,12 +132,20 @@ public class Main2Activity extends AppCompatActivity {
         }
 
         public class ViewHolder extends RecyclerView.ViewHolder{
-            public TextView text_title, text_description;
+            public TextView title, description, numPeople, maxNumPeople;
+            public TextView [] tag = new TextView[5];
 
             public ViewHolder(View v){
                 super(v);
-                text_title = (TextView) v.findViewById(R.id.textGroupTitle);
-                text_description = (TextView) v.findViewById(R.id.textGroupDescription);
+                title = (TextView) v.findViewById(R.id.textGroupTitle);
+                description = (TextView) v.findViewById(R.id.textGroupDescription);
+                numPeople = (TextView) v.findViewById(R.id.textNumPeople);
+                maxNumPeople = (TextView) v.findViewById(R.id.textMaxNumPeople);
+                tag[0] = (TextView) v.findViewById(R.id.textTag1);
+                tag[1] = (TextView) v.findViewById(R.id.textTag2);
+                tag[2] = (TextView) v.findViewById(R.id.textTag3);
+                tag[3] = (TextView) v.findViewById(R.id.textTag4);
+                tag[4] = (TextView) v.findViewById(R.id.textTag5);
             }
         }
 
@@ -206,10 +215,28 @@ public class Main2Activity extends AppCompatActivity {
             items = null;
             items = new ArrayList<>();
 
+            String title;
+            String description;
+            int numPeople;
+            int maxNumPeople;
+            String [] tag = new String[5];
+
             try {
                 for(int i=0; i<result.length(); i++){
-
-                    items.add(new ItemGroup(result.getJSONObject(i).getString("name"), result.getJSONObject(i).getString("description")));
+                    title = result.getJSONObject(i).getString("name");
+                    description = result.getJSONObject(i).getString("description");
+                    numPeople = result.getJSONObject(i).getInt("num_people");
+                    maxNumPeople = result.getJSONObject(i).getInt("max_num_people");
+                    for(int j=0; j<tag.length; j++){
+                        tag[j] = " ";
+                        String temp = result.getJSONObject(i).getString("tag"+Integer.toString(j+1));
+                        if(temp.equals("null")) {
+                            tag[j] = " ";
+                        }
+                        else
+                            tag[j] = "# "+temp;
+                    }
+                    items.add(new ItemGroup(title, description, maxNumPeople, numPeople, tag));
                 }
 
                 adapter = new MyAdapter(mContext, items);

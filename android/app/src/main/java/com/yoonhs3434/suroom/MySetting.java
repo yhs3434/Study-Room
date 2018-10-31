@@ -4,8 +4,11 @@ public class MySetting {
     private static String my_url;
     private static int my_id;
 
+    String serverUrl = "http://las9897.pythonanywhere.com/rest/";
+    String localUrl = "http://10.0.2.2:8000/rest/";
+
     public MySetting(){
-        my_url = null;
+        my_url = localUrl;
         my_id = 0;
     }
 

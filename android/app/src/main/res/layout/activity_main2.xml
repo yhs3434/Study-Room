@@ -30,22 +30,10 @@
         app:layout_constraintStart_toEndOf="@+id/choiceSubjectButton"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/matchingButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="56dp"
-        android:layout_marginLeft="56dp"
-        android:layout_marginTop="16dp"
-        android:onClick="matchingClicked"
-        android:text="매칭 시작"
-        app:layout_constraintStart_toEndOf="@+id/groupListButton"
-        app:layout_constraintTop_toBottomOf="@+id/choiceSubjectButton" />
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/groupList"
-        android:layout_width="368dp"
-        android:layout_height="329dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
@@ -56,15 +44,15 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/matchingButton" />
+        app:layout_constraintTop_toBottomOf="@+id/groupListButton" />
 
     <Button
         android:id="@+id/groupListButton"
         android:layout_width="wrap_content"
         android:layout_height="49dp"
-        android:layout_marginStart="44dp"
-        android:layout_marginLeft="44dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginLeft="48dp"
+        android:layout_marginTop="8dp"
         android:onClick="getGroupListClicked"
         android:text="전체 그룹 가져오기"
         app:layout_constraintStart_toStartOf="parent"
