@@ -1,16 +1,15 @@
 package com.yoonhs3434.suroom;
 
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 import android.widget.Toast;
+
+import com.yoonhs3434.suroom.myLibrary.HttpPost;
 
 import org.json.JSONException;
 import org.json.JSONObject;

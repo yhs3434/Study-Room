@@ -20,6 +20,7 @@ class User_info(models.Model):
         return ("")
 '''
 
+# User와 Group은 수정 할 시 안드로이드의 MySetting도 수정해줘야 함.
 class User(models.Model):
     auth_id = models.CharField(max_length=20)
     auth_pw = models.CharField(max_length=20)

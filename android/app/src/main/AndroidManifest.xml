@@ -37,7 +37,13 @@
         <activity
             android:name=".LoadingActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
-        <activity android:name=".GroupDetail"></activity>
+        <activity android:name=".GroupMatch.GroupDetail" />
+        <activity android:name=".GroupMatch.GroupSearch" />
+        <activity android:name=".GroupMake" />
+        <activity android:name=".GroupRoom.GroupMain" />
+        <activity
+            android:name=".GroupRoom.JoinCheck"
+            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog"/>
     </application>
 
 </manifest>

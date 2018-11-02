@@ -171,7 +171,7 @@ class FindGroupDetail(APIView):
 # 방 목록, 생성 클래스
 class group_list(APIView):
     def get(self, request):
-        groups = Group.objects.filter(public=True)
+        groups = Group.objects.filter(public=True).order_by("-created_date")
         serializer = GroupSerializer(groups, many=True)
         return Response(serializer.data)
 
@@ -192,11 +192,18 @@ class group_detail(APIView):
         except Group.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
+    def get(self, request, pk):
+        group = self.get_object(pk)
+        serializer = GroupSerializer(group)
+        return Response(data = serializer.data, status = status.HTTP_200_OK)
+
     def delete(self, request, pk):
         obj = self.get_object(pk)
         obj.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+# 스터디 그룹 가입 함수.
+@api_view(['POST'])
 def join_group(request):
     if (request.method != 'POST'):
         return Response(status=status.HTTP_400_BAD_REQUEST)
@@ -209,6 +216,15 @@ def join_group(request):
         group = Group.objects.get(pk=group_id)
     except:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    try:
+        num_of_people = group.num_people
+        max_of_people = group.max_num_people
+        if(num_of_people<max_of_people):
+            obj, created = User_Group.objects.update_or_create(user=user, group=group)
+            if(created):
+                group.num_people += 1
+                group.save()
+    except:
+        return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
-    User_Group.objects.create(user=user, group=group, role=0)
     return Response(status=status.HTTP_201_CREATED)
