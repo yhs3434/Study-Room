@@ -1,6 +1,7 @@
 "# SuRoom" 
 
-member : Park Hong Je, Yoon Han Sol, Lee Dong Gon
+master : Yoon Han Sol
+member : Park Hong Je
 
 Directory list
 - Server (django)
