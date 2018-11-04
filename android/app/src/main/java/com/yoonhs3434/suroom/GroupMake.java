@@ -124,6 +124,8 @@ public class GroupMake extends AppCompatActivity {
                     result+=line;
                 }
 
+                reader.close();
+
                 JSONObject resData = new JSONObject(result);
 
                 return resData.getInt("id");
@@ -156,7 +158,7 @@ public class GroupMake extends AppCompatActivity {
 
             JoinGroupTask send = new JoinGroupTask();
             send.execute(MySetting.getMyUrl()+"group/join/", reqData.toString());
-            Toast.makeText(getApplicationContext(), "스터디 생성 완료!", Toast.LENGTH_LONG).show();
+
             finish();
         }
     }
@@ -187,10 +189,11 @@ public class GroupMake extends AppCompatActivity {
 
                 int responseCode = conn.getResponseCode();
                 if(responseCode == 400){
+                    Toast.makeText(getApplicationContext(), "스터디 생성 실패!", Toast.LENGTH_LONG).show();
                     Log.e("join", Integer.toString(responseCode));
+                }else {
+                    Toast.makeText(getApplicationContext(), "스터디 생성 완료!", Toast.LENGTH_LONG).show();
                 }
-
-                return null;
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {

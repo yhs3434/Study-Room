@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".GroupRoom.GroupMain">
+    tools:context=".GroupRoom.GroupHome">
 
     <ScrollView
         android:layout_width="0dp"
@@ -21,45 +21,52 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
+            android:id="@+id/groupMainLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/bannerImage"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="200dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                tools:layout_editor_absoluteY="46dp"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_weight="1" />
 
             <TextView
                 android:id="@+id/studyNameText"
-                style="@style/Widget.MaterialComponents.TextInputEditText.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:layout_marginBottom="@dimen/activity_horizontal_margin"
-                android:text="스터디 이름" />
+                android:layout_margin="16dp"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif-condensed"
+                android:text="스터디 이름"
+                android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+                android:textColor="@color/design_default_color_primary_dark"
+                android:textSize="24sp" />
 
-            <EditText
+            <TextView
                 android:id="@+id/studyNotificationText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
                 android:ems="10"
                 android:inputType="textMultiLine"
-                android:text="공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다." />
+                android:lineSpacingExtra="8sp"
+                android:text="공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다. 공지는 여기에 씁니다."
+                android:textColor="@android:color/background_dark" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_margin="@dimen/activity_vertical_margin"
+                android:layout_weight="1"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -94,7 +101,7 @@
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_weight="1"
                         android:text="참여"
-                        android:visibility="invisible" />
+                        android:visibility="gone" />
 
                     <Button
                         android:id="@+id/joinButton"
@@ -102,9 +109,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="16dp"
                         android:layout_marginRight="16dp"
-                        android:onClick="joinButtonClicked"
                         android:text="가입"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
                 </FrameLayout>
 

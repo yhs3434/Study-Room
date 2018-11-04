@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.yoonhs3434.suroom.home.HomeActivity;
 import com.yoonhs3434.suroom.myLibrary.HttpLogin;
 
 import org.json.JSONException;
@@ -18,6 +19,7 @@ public class LoginActivity extends AppCompatActivity {
 
     String text_id, text_pw;
     int id_number;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,7 +60,7 @@ public class LoginActivity extends AppCompatActivity {
                     try {
                         id_number = result.getInt("id");
                         MySetting.setMyId(id_number);
-                        Intent intent = new Intent(getApplicationContext(), Main2Activity.class);
+                        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
                         startActivity(intent);
                         MainActivity mainActivity = (MainActivity)MainActivity._MainActivity;
                         mainActivity.finish();

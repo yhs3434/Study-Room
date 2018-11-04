@@ -36,6 +36,7 @@ public class HttpPost extends  Thread {
             OutputStream os = conn.getOutputStream();
             os.write(data.getBytes("UTF-8"));
             os.flush();
+            os.close();
 
             int responseCode = conn.getResponseCode();
 

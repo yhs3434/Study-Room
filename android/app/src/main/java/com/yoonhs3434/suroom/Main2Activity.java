@@ -9,7 +9,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
-import com.yoonhs3434.suroom.GroupMatch.GroupSearch;
+import com.yoonhs3434.suroom.home.Home;
+import com.yoonhs3434.suroom.home.HomeActivity;
+import com.yoonhs3434.suroom.home.SearchGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -39,11 +41,14 @@ public class Main2Activity extends AppCompatActivity {
 
         choice_tendency_btn = (Button) findViewById(R.id.choiceTendencyButton);
         // matching_btn = (Button) findViewById(R.id.matchingButton);
-        new MySetting();
+        if(MySetting.init == false) {
+            new MySetting();
+            MySetting.init = true;
+        }
     }
 
     public void groupSearchClicked(View v){
-        Intent intent = new Intent(getApplicationContext(), GroupSearch.class);
+        Intent intent = new Intent(getApplicationContext(), HomeActivity.class);
         startActivity(intent);
     }
 
@@ -67,7 +72,7 @@ public class Main2Activity extends AppCompatActivity {
     }
     */
 
-    class HttpGetRequest extends AsyncTask<String, Void, JSONArray> {
+    private class HttpGetRequest extends AsyncTask<String, Void, JSONArray> {
 
         String REQUEST_METHOD = "GET";
         int READ_TIMEOUT = 15000;
@@ -79,10 +84,11 @@ public class Main2Activity extends AppCompatActivity {
             JSONArray result = null;
             String inputLine;
             String stringResult;
+            HttpURLConnection connection = null;
 
             try {
                 URL myUrl = new URL(stringUrl);
-                HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
+                connection = (HttpURLConnection) myUrl.openConnection();
 
                 connection.setRequestMethod(REQUEST_METHOD);
                 connection.setReadTimeout(READ_TIMEOUT);
@@ -112,6 +118,9 @@ public class Main2Activity extends AppCompatActivity {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            } finally{
+                if(connection != null)
+                    connection.disconnect();
             }
             return result;
         }

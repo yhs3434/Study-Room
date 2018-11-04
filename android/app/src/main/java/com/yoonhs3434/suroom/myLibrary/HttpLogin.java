@@ -56,14 +56,17 @@ public class HttpLogin extends Thread {
                 br.close();
                 resultData = new JSONObject(sb.toString());
             }else{
+                conn.disconnect();
                 return;
             }
-            conn.disconnect();
 
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
+        } finally{
+            if(conn != null)
+                conn.disconnect();
         }
     }
 

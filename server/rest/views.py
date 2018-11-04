@@ -7,7 +7,7 @@ from .models import User, Group, Subject, Tendency
 from .models import User_Group, User_Subject, User_Tendency
 from .models import Wait
 from .serializers import UserSerializer, UserSubjectSerializer, UserTendencySerializer
-from. serializers import WaitSerializer, GroupSerializer
+from. serializers import WaitSerializer, GroupSerializer, UserGroupSerializer
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -228,3 +228,60 @@ def join_group(request):
         return Response(status=status.HTTP_500_INTERNAL_SERVER_ERROR)
     
     return Response(status=status.HTTP_201_CREATED)
+
+class UserGroupList(APIView):
+    def get_object(self, user_pk, group_pk):
+        try:
+            print(user_pk, group_pk)
+            user = User.objects.get(pk= user_pk)
+            group = Group.objects.get(pk= group_pk)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        except Group.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return user, group
+    
+    def get(self, request, user_pk, group_pk):
+        user, group = self.get_object(user_pk, group_pk)
+        try:
+            user_group = User_Group.objects.filter(user = user).get(group = group)
+            return Response(data=200, status=status.HTTP_200_OK)
+        except User_Group.DoesNotExist:
+            return Response(data=404, status=status.HTTP_404_NOT_FOUND)
+
+    def delete(self, request, user_pk, group_pk):
+        user, group = self.get_object(user_pk, group_pk)
+        try:
+            user_group = User_Group.objects.filter(user = user).get(group = group)
+        except User_Group.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        try:
+            group = user_group.group
+            user_group.delete()
+            group.num_people -= 1
+            group.save()
+            return Response(status=status.HTTP_204_NO_CONTENT)
+        except:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
+
+        
+class UserGroupListUser(APIView):
+    def get_object(self, pk):
+        try:
+            user = User.objects.get(pk = pk)
+        except User.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        return user
+
+    def get(self, request, pk):
+        user = self.get_object(pk)
+        try:
+            user_group = User_Group.objects.filter(user = user)
+            list_id = []
+            for obj in user_group:
+                list_id.append(obj.group.id)
+            group = Group.objects.filter(pk__in = list_id).order_by("-created_date")
+            serializer = GroupSerializer(group, many=True)
+            return Response(data=serializer.data, status=status.HTTP_200_OK)
+        except User_Group.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)

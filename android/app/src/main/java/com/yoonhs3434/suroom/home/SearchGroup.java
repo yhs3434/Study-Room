@@ -1,11 +1,13 @@
-package com.yoonhs3434.suroom.GroupMatch;
+package com.yoonhs3434.suroom.home;
 
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,77 +21,81 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.yoonhs3434.suroom.GroupMake;
-import com.yoonhs3434.suroom.GroupRoom.GroupMain;
+import com.yoonhs3434.suroom.GroupMatch.ItemGroup;
+import com.yoonhs3434.suroom.GroupRoom.GroupRoom;
 import com.yoonhs3434.suroom.MySetting;
 import com.yoonhs3434.suroom.R;
-import com.yoonhs3434.suroom.myLibrary.MyTouchListener;
 
 import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.Serializable;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
-public class GroupSearch extends AppCompatActivity {
-    Button searchButton;        // 만들어야 함 (해시 태그 검색 기능)
+public class SearchGroup extends Fragment implements SwipeRefreshLayout.OnRefreshListener {
+    Button searchButton, makeButton;        // 만들어야 함 (해시 태그 검색 기능)
     EditText searchText;
 
-    RecyclerView groupListView;
-    RecyclerView.Adapter adapter;
-    RecyclerView.LayoutManager layoutManager;
-    ArrayList items;
-    Context mContext;
+    private RecyclerView recyclerView;
+    private RecyclerView.Adapter adapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private ArrayList items;
+    private Context mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_group_search);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_search_group, container, false);
 
-        searchText = (EditText) findViewById(R.id.searchGroupText);
-        searchButton = (Button) findViewById(R.id.searchGroupButton);
-        groupListView = (RecyclerView) findViewById(R.id.groupListView);
-        groupListView.setHasFixedSize(true);
-        groupListView.setItemAnimator(new DefaultItemAnimator());
+        searchText = (EditText) view.findViewById(R.id.searchGroupText);
+        searchButton = (Button) view.findViewById(R.id.searchGroupButton);
+        makeButton = (Button) view.findViewById(R.id.makeGroupButton);
+        makeButton.setOnClickListener(makeOnClickListener);
+        recyclerView = (RecyclerView) view.findViewById(R.id.groupListView);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
         items = new ArrayList<ItemGroup>();
+        mContext = getActivity().getApplicationContext();
 
-        mContext = getApplicationContext();
+        layoutManager = new LinearLayoutManager(mContext);
+        recyclerView.setLayoutManager(layoutManager);
 
-        layoutManager = new LinearLayoutManager(this);
-        groupListView.setLayoutManager(layoutManager);
-
-
-        getAllGroupList();
+        return view;
     }
 
-    public void refreshButtonClicked(View v){
-        if(searchText.getText().toString().equals(""))
-            getAllGroupList();
-        else
-            Log.d("tag", "here is");
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+
+        if (isVisibleToUser){
+            // execute your asynctask here
+            String [] params = new String[1];
+            params[0] = MySetting.getMyUrl()+"group/";
+
+            HttpGetRequest myHttp = new HttpGetRequest();
+            myHttp.execute(params);
+        }
     }
 
-    public void getAllGroupList(){
-        String [] params = new String[1];
-        params[0] = MySetting.getMyUrl()+"group/";
+    @Override
+    public void onRefresh() {
 
-        HttpGetRequest myHttp = new HttpGetRequest();
-        myHttp.execute(params);
     }
 
-    public void makeGroupClicked(View v){
-        Intent intent = new Intent(getApplicationContext(), GroupMake.class);
-        startActivity(intent);
-    }
+    private View.OnClickListener makeOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View v){
+            Intent intent = new Intent(mContext, GroupMake.class);
+            startActivity(intent);
+        }
+    };
 
-    class MyAdapter extends RecyclerView.Adapter<GroupSearch.MyAdapter.ViewHolder>{
+    private class MyAdapter extends RecyclerView.Adapter<SearchGroup.MyAdapter.ViewHolder>{
         private Context context;
         private ArrayList<ItemGroup> mItems;
 
@@ -101,14 +107,14 @@ public class GroupSearch extends AppCompatActivity {
         }
 
         @Override
-        public GroupSearch.MyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
+        public SearchGroup.MyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int i) {
             View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_item_group, parent, false);
-            GroupSearch.MyAdapter.ViewHolder holder = new GroupSearch.MyAdapter.ViewHolder(v);
+            SearchGroup.MyAdapter.ViewHolder holder = new SearchGroup.MyAdapter.ViewHolder(v);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(@NonNull GroupSearch.MyAdapter.ViewHolder holder, final int i) {
+        public void onBindViewHolder(@NonNull SearchGroup.MyAdapter.ViewHolder holder, final int i) {
             holder.title.setText(mItems.get(i).title);
             holder.description.setText(mItems.get(i).description);
             holder.numPeople.setText(Integer.toString(mItems.get(i).numPeople));
@@ -124,11 +130,11 @@ public class GroupSearch extends AppCompatActivity {
                     Context context = v.getContext();
                     Toast.makeText(context, mItems.get(i).id +""+mItems.get(i).title, Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(mContext, GroupMain.class);
+                    Intent intent = new Intent(mContext, GroupRoom.class);
                     intent.putExtra("id", mItems.get(i).id);
+                    MySetting.setGroupId(mItems.get(i).id);
 
                     startActivity(intent);
-                    finish();
                 }
             });
         }
@@ -168,7 +174,9 @@ public class GroupSearch extends AppCompatActivity {
         */
     }
 
-    class HttpGetRequest extends AsyncTask<String, Void, JSONArray> {
+    private class HttpGetRequest extends AsyncTask<String, Void, JSONArray> {
+
+        HttpURLConnection conn;
 
         String REQUEST_METHOD = "GET";
         int READ_TIMEOUT = 15000;
@@ -183,15 +191,15 @@ public class GroupSearch extends AppCompatActivity {
 
             try {
                 URL myUrl = new URL(stringUrl);
-                HttpURLConnection connection = (HttpURLConnection) myUrl.openConnection();
+                conn = (HttpURLConnection) myUrl.openConnection();
 
-                connection.setRequestMethod(REQUEST_METHOD);
-                connection.setReadTimeout(READ_TIMEOUT);
-                connection.setConnectTimeout(CONNECTION_TIMEOUT);
+                conn.setRequestMethod(REQUEST_METHOD);
+                conn.setReadTimeout(READ_TIMEOUT);
+                conn.setConnectTimeout(CONNECTION_TIMEOUT);
 
-                connection.connect();
+                conn.connect();
 
-                InputStreamReader streamReader = new InputStreamReader(connection.getInputStream());
+                InputStreamReader streamReader = new InputStreamReader(conn.getInputStream());
                 BufferedReader reader = new BufferedReader(streamReader);
                 StringBuilder stringBuilder = new StringBuilder();
 
@@ -205,6 +213,9 @@ public class GroupSearch extends AppCompatActivity {
                 stringResult = stringBuilder.toString();
                 result = new JSONArray(stringResult);
 
+                Log.d("Url", stringUrl);
+                Log.d("Result", result.toString());
+
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (ProtocolException e) {
@@ -213,6 +224,9 @@ public class GroupSearch extends AppCompatActivity {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            }   finally{
+                if(conn != null)
+                    conn.disconnect();
             }
             return result;
         }
@@ -228,7 +242,7 @@ public class GroupSearch extends AppCompatActivity {
             String description;
             int numPeople;
             int maxNumPeople;
-            String [] tag = new String[5];
+            String [] tag = new String[MySetting.NUM_OF_TAG];
 
             try {
                 for(int i=0; i<result.length(); i++){
@@ -250,7 +264,7 @@ public class GroupSearch extends AppCompatActivity {
                 }
 
                 adapter = new MyAdapter(mContext, items);
-                groupListView.setAdapter(adapter);
+                recyclerView.setAdapter(adapter);
             } catch (JSONException e) {
                 e.printStackTrace();
             }

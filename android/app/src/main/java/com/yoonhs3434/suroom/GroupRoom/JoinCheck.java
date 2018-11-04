@@ -108,6 +108,10 @@ public class JoinCheck extends Activity {
             super.onPostExecute(result);
             if(result >= 200 && result <400){
                 Toast.makeText(getApplicationContext(), "가입 완료", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(getApplicationContext(), GroupRoom.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                intent.putExtra("id", groupId);
+                startActivity(intent);
             }
             else{
                 Toast.makeText(getApplicationContext(), "가입 실패", Toast.LENGTH_SHORT).show();

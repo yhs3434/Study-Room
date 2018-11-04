@@ -21,15 +21,15 @@ public class MySetting {
     private static int group_id;
     private static User myUser;
     private static Group myGroup;
+    public static boolean init = false;
 
     String serverUrl = "http://las9897.pythonanywhere.com/rest/";
     String localUrl = "http://10.0.2.2:8000/rest/";
 
     public MySetting(){
-        my_url = localUrl;
-        my_id = 0;
         myUser = new User();
         myGroup = new Group();
+        init = true;
     }
 
     public static void setMyUrl(String urlParam){
@@ -77,7 +77,7 @@ public class MySetting {
         send.execute(MySetting.getMyUrl()+"group/", Integer.toString(groupId));
     }
 
-    private class Group{
+    public static class Group{
         public int id;
         public String name;
         public String description;
@@ -127,7 +127,7 @@ public class MySetting {
         int READ_TIMEOUT = 15000;
         int CONNECTION_TIMEOUT = 15000;
 
-        HttpURLConnection conn;
+        HttpURLConnection conn = null;
 
         @Override
         protected JSONObject doInBackground(String... strings) {
@@ -172,6 +172,9 @@ public class MySetting {
                 e.printStackTrace();
             } catch (JSONException e) {
                 e.printStackTrace();
+            }finally{
+                if(conn!=null)
+                    conn.disconnect();
             }
 
             return null;

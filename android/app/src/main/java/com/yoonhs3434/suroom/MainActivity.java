@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        MySetting.setMyUrl("http://10.0.2.2:8000/rest/");
+        MySetting.setMyUrl("http://192.168.0.101:8000/rest/");
         _MainActivity = MainActivity.this;
     }
 
