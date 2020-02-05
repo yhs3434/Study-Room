@@ -11,10 +11,20 @@
   - Server (django)
   - Application (android)
 
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+
 ## 시연 영상
+
+<br/>
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/oZTlpe2u0iE/0.jpg)](https://youtu.be/oZTlpe2u0iE)
 
+<br/>
+<br/>
 <br/>
 <br/>
 <br/>
