@@ -1,13 +1,15 @@
 # SuRoom
 
-- description : 스터디 매칭 어플리케이션. 오픈소스SW설계 수업에서의 개발 산출물.
+- #### description
+  스터디 매칭 어플리케이션. 오픈소스SW설계 수업에서의 개발 산출물.
 
-master : Yoon Han Sol
-member : Park Hong Je, Lee Dong Gon
+- #### member
+  master : Yoon Han Sol
+  member : Park Hong Je, Lee Dong Gon
 
-Directory list
-- Server (django)
-- Application (android)
+- #### Directory list
+  - Server (django)
+  - Application (android)
 
 ## 프로토 타입 보고서 (수업용 보고서로 대체)
 
