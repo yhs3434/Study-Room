@@ -4,7 +4,9 @@
   스터디 매칭 어플리케이션. 오픈소스SW설계 수업에서의 개발 산출물.
 
 - #### member
+
   master : Yoon Han Sol
+  
   member : Park Hong Je, Lee Dong Gon
 
 - #### Directory list
