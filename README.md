@@ -11,6 +11,13 @@
   - Server (django)
   - Application (android)
 
+## 시연 영상
+
+[![Video Label](http://img.youtube.com/vi/uLR1RNqJ1Mw/0.jpg)](https://youtu.be/oZTlpe2u0iE)
+
+
+
+
 ## 프로토 타입 보고서 (수업용 보고서로 대체)
 
 ![프로토타입 보고서-SuRoom_page-0002](https://user-images.githubusercontent.com/24651852/73862500-febcf980-4881-11ea-8147-299c883bc84e.jpg)
