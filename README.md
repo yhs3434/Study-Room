@@ -13,7 +13,7 @@
 
 ## 시연 영상
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID_HERE/0.jpg)](https://www.youtube.com/watchv=oZTlpe2u0iE)
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/oZTlpe2u0iE/0.jpg)](https://youtu.be/oZTlpe2u0iE)
 
 
 
