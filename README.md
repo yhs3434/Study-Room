@@ -13,7 +13,7 @@
 
 ## 시연 영상
 
-<video src="https://youtu.be/oZTlpe2u0iE" />
+<video src="https://youtu.be/oZTlpe2u0iE" height="400" width="320" controls />
 
 
 
