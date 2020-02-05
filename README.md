@@ -13,9 +13,8 @@
 
 ## 시연 영상
 
-[![Video Label](](https://youtu.be/oZTlpe2u0iE)
+<video src="https://youtu.be/oZTlpe2u0iE" />
 
-https://youtu.be/oZTlpe2u0iE
 
 
 ## 프로토 타입 보고서 (수업용 보고서로 대체)
